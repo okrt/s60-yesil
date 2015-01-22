@@ -1,0 +1,62 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script language="javascript">
+var systemServiceObj = null;
+ 
+// Called from the onload event handler to initialize the widget.
+function init() 
+{
+    try
+    {
+        systemServiceObj = device.getServiceObject("Service.SysInfo", "ISysInfo");
+    } 
+    catch (ex) 
+    {
+ 	    window.location="nosupport.html";
+        return;
+    }
+    getDisplayResolution();
+}
+ 
+// Display Information
+function getDisplayResolution()
+{
+    // Initialize the criteria for the service object and obtain the
+    // information
+    var criteria = new Object();
+    criteria.Entity = "Display";
+    criteria.Key = "DisplayResolution";
+    try {
+        var result = systemServiceObj.ISysInfo.GetInfo(criteria);
+    }
+    catch (ex) 
+    {
+        alert(ex);
+        return;
+    }
+    var x = result.ReturnValue.XPixels;
+    var y = result.ReturnValue.YPixels;
+	if (x=640)
+	{
+	window.location="ana.html";
+	}
+	else if (x=360)
+	{
+	window.location="ana.html";
+	}
+	else
+	{
+	window.location="nosupport.html";
+	}
+}
+init()
+</script>
+<title>Yeşil</title>
+</head>
+
+<body>
+Yükleniyor...
+</body>
+</html>
